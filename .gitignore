@@ -1,0 +1,12 @@
+# Development Artifacts
+.vscode/
+.vs/
+CMakeSettings.json
+
+# Build Artifacts
+build/
+out/
+*.slx
+
+# Miscellaneous Artifacts
+*.fmt
