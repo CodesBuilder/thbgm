@@ -16,7 +16,7 @@
 //
 int cmdop_list(int argc, char** argv);
 int cmdop_help(int argc, char** argv);
-int cmdop_hand(int argc, char** argv);
+int cmdop_extract(int argc, char** argv);
 
 //
 // Command operation entries

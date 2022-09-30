@@ -1,1 +1,3 @@
-add_executable(thbgm "thbgm.h" "cmdop.h" "list.c" "help.c" "main.c" "hand.c")
+aux_source_directory("." SRC)
+
+add_executable(thbgm ${SRC})

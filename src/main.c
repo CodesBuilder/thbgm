@@ -17,7 +17,7 @@
 cmdop_t cmdops[] = {
 	{ .name = "list", .proc = cmdop_list, .help = "List music entries from THFMT files" },
 	{ .name = "help", .proc = cmdop_help, .help = "Display the help message" },
-	{ .name = "\t", .proc = cmdop_hand, .help = ""},
+	{ .name = "extract", .proc = cmdop_extract, .help = "Extract an THBGM file" },
 	{ NULL }
 };
 

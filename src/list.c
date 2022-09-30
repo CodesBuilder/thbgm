@@ -25,29 +25,21 @@ int cmdop_list(int argc, char** argv) {
 		return -1;
 	}
 
-	// Get file size
-	long size = 0;
-	{
-		fseek(fp, 0, SEEK_END);
-		size = ftell(fp);
-		fseek(fp, 0, SEEK_SET);
-		if (size < 0) {
+	// Read for each entries and print them with BGMForAll format
+	while(1) {
+		char filename[16];
+		thbgm_entry_t entry;
+
+		if (!fread(&filename, sizeof(filename), 1, fp)) {
 			fclose(fp);
-			puts("Error getting file size");
+			puts("Error reading file");
 			return -1;
 		}
-	}
 
-	// Check if the file was aligned
-	if (size % sizeof(thbgm_entry_t)) {
-		size -= (size % sizeof(thbgm_entry_t));
-		puts("Warning: The file was not aligned!");
-	}
+		if(!filename[0])
+			break;
 
-	// Read for each entries and print them with BGMForAll format
-	for (long i = 0, j = 0; i < size; i += sizeof(thbgm_entry_t), j++) {
-		thbgm_entry_t entry;
-		if (!fread(&entry, sizeof(thbgm_entry_t), 1, fp)) {
+		if (!fread(&entry, sizeof(entry), 1, fp)) {
 			fclose(fp);
 			puts("Error reading file");
 			return -1;
@@ -55,7 +47,7 @@ int cmdop_list(int argc, char** argv) {
 
 		printf(
 			"BGM = %s, 0x%x, 0x%x, 0x%x, 0x%x\n",
-			entry.fileName,
+			filename,
 			entry.offBegin,
 			entry.offLoopBegin,
 			entry.offBegin + entry.offLoopBegin,
